@@ -1,0 +1,11 @@
+{
+  "name": "space-inside",
+  "version": "0.0.0",
+  "title": "Space Inside",
+  "author": "Qypea",
+  "factorio_version": "1.1",
+  "dependencies": [
+      "base >= 1.1"
+  ],
+  "description": "Spaceblock in other mods"
+}
