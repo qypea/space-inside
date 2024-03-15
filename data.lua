@@ -35,7 +35,7 @@ local function dupeFluid(fluid_item)
         category = "oil-processing",
         energy_required = 5,
         ingredients = { { type = "fluid", name = fluid_item.name, amount = 125 } },
-        results = { { type = "fluid", name = fluid_item.name, amount = 165 } },
+        results = { { type = "fluid", name = fluid_item.name, amount = 165, temperature = fluid_item.temperature } },
     }
 
     data:extend({ dupe })
