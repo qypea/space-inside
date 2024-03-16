@@ -1,13 +1,17 @@
 local function dupeResource(item)
-    print("dupeResource: ");
+    print("dupeResource: ")
     for k, v in pairs(item) do
-        print(k, ":", v);
+        print(k, ":", v)
     end
-    print("minable: ", serpent.block(item.minable));
+    print("minable: ", serpent.block(item.minable))
 
-    local result = { type = "item", name = item.minable.result, amount = 1 };
+    if (item.category == "se-core-mining") then
+        return
+    end
+
+    local result = { type = "item", name = item.minable.result, amount = 1 }
     if (item.minable.results) then
-        result = item.minable.results[1];
+        result = item.minable.results[1]
     end
 
     local dupe = {
@@ -23,13 +27,13 @@ local function dupeResource(item)
     }
 
     if (result.type == "fluid") then
-        dupe.category = "oil-processing";
-        dupe.ingredients = { { type = "fluid", name = result.name, amount = 125 } };
-        dupe.results = { { type = "fluid", name = result.name, amount = 165, temperature = item.temperature } };
+        dupe.category = "oil-processing"
+        dupe.ingredients = { { type = "fluid", name = result.name, amount = 125 } }
+        dupe.results = { { type = "fluid", name = result.name, amount = 165, temperature = item.temperature } }
     else
         dupe.category = "crafting";
-        dupe.ingredients = { { type = "item", name = result.name, amount = 5 } };
-        dupe.results = { { type = "item", name = result.name, amount = 6 } };
+        dupe.ingredients = { { type = "item", name = result.name, amount = 5 } }
+        dupe.results = { { type = "item", name = result.name, amount = 6 } }
 
         if (item.minable.required_fluid) then
             table.insert(dupe.ingredients,
@@ -39,9 +43,14 @@ local function dupeResource(item)
     end
 
     print("result: ", serpent.block(dupe));
-    data:extend({ dupe })
+    return dupe
 end
 
+local dupes = {};
 for k, v in pairs(data.raw.resource) do
-    dupeResource(v)
+    local dupe = dupeResource(v)
+    if (dupe) then
+        table.insert(dupes, dupe)
+    end
 end
+data:extend(dupes);
