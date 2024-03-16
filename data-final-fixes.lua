@@ -1,3 +1,4 @@
+-- Create recipes to duplicate resources
 local function dupeResource(item)
     print("dupeResource: ")
     for k, v in pairs(item) do

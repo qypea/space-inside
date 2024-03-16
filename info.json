@@ -8,5 +8,5 @@
       "base >= 1.1",
       "? spaceexploration"
   ],
-  "description": "Spaceblock in other mods"
+  "description": "Item duplication recipes ala Spaceblock in other mods"
 }
